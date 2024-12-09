@@ -4,14 +4,14 @@ class Article:
         self.author = author
         self.magazine = magazine
         self.title = title
-        Article.all,append(self)
+        Article.all.append(self)
         
 class Author:
     def __init__(self, name):
         self.name = name
 
     def articles(self):
-        pass
+        return [article for article in Article.all if article.author == self]
 
     def magazines(self):
         pass
@@ -30,7 +30,7 @@ class Magazine:
         Magazine.all.append(self)
 
     def articles(self):
-        pass
+        return [article for article in Article.all if article.magazine == self]
 
     def contributors(self):
         pass

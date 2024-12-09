@@ -20,7 +20,17 @@ class Article:
         
 class Author:
     def __init__(self, name):
-        self.name = name
+        if not isinstance(name, str) or len(name) == 0:
+            return 
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        pass
 
     def articles(self):
         return [article for article in Article.all if article.author == self]

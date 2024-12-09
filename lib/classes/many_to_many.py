@@ -41,4 +41,8 @@ class Magazine:
         return titles if titles else None
 
     def contributing_authors(self):
-        pass
+        author_counts = {}
+        for article in self.article():
+            author_counts[article.author] = author_counts.get(article.author, 0) + 1
+        exceptional_authors = [author for author, count in author_counts.items() if count > 2]
+        return exceptional_authors if exceptional_authors else None

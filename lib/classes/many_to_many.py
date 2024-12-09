@@ -21,7 +21,9 @@ class Author:
         return new_article
 
     def topic_areas(self):
-        return list(set(article.magazine.category for article in self.articles()))
+        mags_categories = [article.magazine.category for article in self.articles()]
+        unique_categories = list(set(mags_categories)) if mags_categories else None
+        return unique_categories
 
 class Magazine:
     all = []

@@ -50,9 +50,35 @@ class Author:
 class Magazine:
     all = []
     def __init__(self, name, category):
-        self.name = name
-        self.category = category
+        if not isinstance(name, str):
+            name = "Vogue"
+        if len(name) <2 or len(name) > 16:
+            name = name[:16] if len(name) > 16 else "Vogue"
+        
+        if not isinstance(category, str) or len(category) == 0:
+            category = "General"
+
+        self._name = name
+        self._category = category
         Magazine.all.append(self)
+    
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        if isinstance(value, str) and 2 <= len(value) <=16:
+            self._name = value
+    
+    @property
+    def category(self):
+        return self._category
+    
+    @category.setter
+    def category(self, value):
+        if isinstance(value, str) and len(value) > 0:
+            self._category =value
 
     def articles(self):
         return [article for article in Article.all if article.magazine == self]
@@ -66,7 +92,7 @@ class Magazine:
 
     def contributing_authors(self):
         author_counts = {}
-        for article in self.article():
+        for article in self.articles():
             author_counts[article.author] = author_counts.get(article.author, 0) + 1
         exceptional_authors = [author for author, count in author_counts.items() if count > 2]
         return exceptional_authors if exceptional_authors else None
@@ -78,4 +104,4 @@ class Magazine:
         magazine_article_counts = {}
         for article in Article.all:
             magazine_article_counts[article.magazine] = magazine_article_counts.get(article.magazine, 0) + 1
-        return max(magazine_article_counts, key = magazine_article_counts.get)
+        return max(magazine_article_counts, key = magazine_article_counts.get) if magazine_article_counts else None

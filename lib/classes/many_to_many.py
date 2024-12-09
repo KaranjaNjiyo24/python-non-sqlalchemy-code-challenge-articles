@@ -17,7 +17,8 @@ class Author:
         pass
 
     def add_article(self, magazine, title):
-        pass
+        new_article = Article(self, magazine, title)
+        return new_article
 
     def topic_areas(self):
         pass

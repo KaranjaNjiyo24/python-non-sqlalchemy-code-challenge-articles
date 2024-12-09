@@ -14,7 +14,7 @@ class Author:
         return [article for article in Article.all if article.author == self]
 
     def magazines(self):
-        pass
+        return list(set(article.magazine for article in self.articles()))
 
     def add_article(self, magazine, title):
         new_article = Article(self, magazine, title)

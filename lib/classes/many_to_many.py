@@ -1,10 +1,22 @@
 class Article:
     all = []
     def __init__(self, author, magazine, title):
+        if not isinstance(title, str):
+            return
+        if len(title) < 5 or len(title) > 50:
+            return
         self.author = author
         self.magazine = magazine
-        self.title = title
+        self._title = title
         Article.all.append(self)
+    
+    @property
+    def title(self):
+        return self._title
+    
+    @title.setter
+    def title(self, value):
+        pass
         
 class Author:
     def __init__(self, name):

@@ -21,7 +21,7 @@ class Author:
         return new_article
 
     def topic_areas(self):
-        pass
+        return list(set(article.magazine.category for article in self.articles()))
 
 class Magazine:
     all = []
